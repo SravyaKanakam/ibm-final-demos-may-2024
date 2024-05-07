@@ -13,7 +13,7 @@ const EmployeeService = {
     },
     update: async (employee, eid) => {
         try {
-            const response = await axios.patch(`${BASE_URL}/update-emp/${eid}`, employee);
+            const response = await axios.put(`${BASE_URL}/update-emp/${eid}`, employee);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -22,7 +22,7 @@ const EmployeeService = {
     },
     delete: async (eid) => {
         try {
-            const response = await axios.delete(`${BASE_URL}/delete-emp/${eid}`);
+            const response = await axios.post(`${BASE_URL}/delete-emp/${eid}`);
             console.log("hi i do the actual work ")
             console.log(response.data);
         } catch (error) {

@@ -1,6 +1,8 @@
 import AddEmployee from "./AddEmployee";
 import EmpList from "./EmpList";
 import UpdateEmployee from "./UpdateEmployee";
+import DeleteEmployee from "./user/DeleteEmployee";
+
 
 const Employee = () => {
     return (
@@ -13,6 +15,8 @@ const Employee = () => {
                 <div className="col-md-6">
                     <EmpList />
                     <UpdateEmployee/>
+                    <DeleteEmployee/>
+                    
                 </div>
             </div>
         </div>

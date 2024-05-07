@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { updatedEmployee } from "../redux/EmpSlice";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+// import EmployeeService from '../../services/EmployeeService';
 import EmployeeService from '../services/EmployeeService';
+import { useDispatch, useSelector } from 'react-redux';
+import {updatedEmployee} from "../redux/EmpSlice";
 
 const UpdateEmployee = ({ employeeId: initialEmployeeId }) => {
     const [employeeId, setEmployeeId] = useState(initialEmployeeId);
@@ -9,10 +11,13 @@ const UpdateEmployee = ({ employeeId: initialEmployeeId }) => {
         firstName: '',
         email: '',
         salary: '',
-        aadhar: ''
+        aadhar: '' 
     });
-
-    const dispatch = useDispatch();
+  const dispatch=useDispatch();
+  const latestData=useSelector(state=>state.emp);
+  console.log('hiiiii')
+  console.log(latestData);
+   
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -36,6 +41,8 @@ const UpdateEmployee = ({ employeeId: initialEmployeeId }) => {
             const user = await EmployeeService.update(employee, employeeId); // Pass employee before employeeId
             console.log(user);
             dispatch(updatedEmployee(user));
+            
+    
         } catch (error) {
             console.log(error);
             if (error.code === 'ERR_BAD_REQUEST') {
@@ -43,32 +50,33 @@ const UpdateEmployee = ({ employeeId: initialEmployeeId }) => {
             }
         }
     };
-
+    
     return (
         <div className="container mt-5">
-            <h2 className="text-center mb-4 text-danger">Update Employee Details</h2>
+            <h2 className="text-center mb-4">Update Employee Details</h2>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                    <label htmlFor="employeeId" className="form-label text-black">Employee ID:</label>
+                    <label htmlFor="employeeId" className="form-label">Employee ID:</label>
                     <input type="text" className="form-control" id="employeeId" name="employeeId" value={employeeId} onChange={handleChange} />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="firstName" className="form-label text-black">First Name:</label>
+                    <label htmlFor="firstName" className="form-label">First Name:</label>
                     <input type="text" className="form-control" id="firstName" name="firstName" value={employee.firstName} onChange={handleChange} />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="email" className="form-label text-black">Email:</label>
+                    <label htmlFor="email" className="form-label">Email:</label>
                     <input type="email" className="form-control" id="email" name="email" value={employee.email} onChange={handleChange} />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="salary" className="form-label text-black">Salary:</label>
+                    <label htmlFor="salary" className="form-label">Salary:</label>
                     <input type="number" className="form-control" id="salary" name="salary" value={employee.salary} onChange={handleChange} />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="aadhar" className="form-label text-black">Aadhar:</label>
-                    <input type="text" className="form-control" id="aadhar" name="aadhar" value={employee.aadhar} onChange={handleChange} />
-                </div>
-                <button type="submit" className="btn btn-danger">Update</button>
+    <label htmlFor="aadhar" className="form-label">Aadhar:</label>
+    <input type="text" className="form-control" id="aadhar" name="aadhar" value={employee.aadhar} onChange={handleChange} />
+</div>
+
+                <button type="submit" className="btn btn-primary">Update</button>
             </form>
         </div>
     );
