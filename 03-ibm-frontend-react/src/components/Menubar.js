@@ -8,11 +8,11 @@ const Menubar = () => {
     if (loginStatus) {
         return (
             <>
-                <ul>
-                    <li> <Link to={'/'}>Home</Link> </li>
-                    <li> <Link to={'/emp'}>Employee</Link> </li>
-                    <li> <Link to={'/parent'}>Parent</Link> </li>
-                    <li> <Link to={'/logout'}>Logout</Link> </li>
+                <ul className="nav nav-pills">
+                    <li className="nav-item"> <Link to={'/'} className="nav-link">Home</Link> </li>
+                    <li className="nav-item"> <Link to={'/emp'} className="nav-link">Employee</Link> </li>
+                    <li className="nav-item"> <Link to={'/parent'} className="nav-link">Parent</Link> </li>
+                    <li className="nav-item"> <Link to={'/logout'} className="nav-link text-danger">Logout</Link> </li>
                 </ul>
             </>
         );
@@ -20,10 +20,10 @@ const Menubar = () => {
     else {
         return (
             <>
-                <ul>
-                    <li> <Link to={'/'}>Home</Link> </li>
-                    <li> <Link to={'/register'}>Register</Link> </li>
-                    <li> <Link to={'/login'}>Login</Link> </li>
+                <ul className="nav nav-pills">
+                    <li className="nav-item"> <Link to={'/'} className="nav-link">Home</Link> </li>
+                    <li className="nav-item"> <Link to={'/register'} className="nav-link">Register</Link> </li>
+                    <li className="nav-item"> <Link to={'/login'} className="nav-link">Login</Link> </li>
                 </ul>
             </>
         );

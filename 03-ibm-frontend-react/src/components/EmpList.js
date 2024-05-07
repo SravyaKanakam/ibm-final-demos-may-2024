@@ -2,66 +2,38 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 const EmpList = () => {
-
     const [empList, setEmpList] = useState('');
 
     useEffect(() => {
-        console.log('useEffect');
-        axios.get('https://jsonplaceholder.typicode.com/users')
+        axios.get('http://localhost:8090/emp/get-all-emps')
             .then((resp) => {
-                console.log(resp.data);
                 setEmpList(resp.data);
-            })
+            });
     }, []);
 
     return (
-        <>
-            <h1>EmpList Component</h1>
-            <table>
+        <div className="container mt-5" style={{ backgroundColor: 'lightpink' }}>
+            <h1 className="text-center">EmpList Component</h1>
+            <table className="table">
                 <thead>
-                    <th>Name</th> <th>Username</th> <th>Email</th> <th>City</th>
+                    <tr>
+                        <th style={{ color: 'orange' }}>ID</th>
+                        <th style={{ color: 'blue' }}>Name</th>
+                        <th style={{ color: 'orange' }}>Salary</th>
+                    </tr>
                 </thead>
                 <tbody>
                     {empList && empList.map(emp =>
-                        <tr key={emp.id}>
-                            <td >{emp.name} </td>
-                            <td >{emp.username} </td>
-                            <td >{emp.email} </td>
-                            <td >{emp.address.city} </td>
+                        <tr key={emp.employeeId}>
+                            <td>{emp.employeeId}</td>
+                            <td>{emp.firstName}</td>
+                            <td>{emp.salary}</td>
                         </tr>
                     )}
                 </tbody>
             </table>
-        </>
+        </div>
     );
 };
 
 export default EmpList;
-
-
-// import axios from "axios";
-// import { useState } from "react";
-
-// const EmpList = () => {
-
-//     const [empList, setEmpList] = useState('');
-
-//     const getEmpList = () => {
-//         axios.get('https://jsonplaceholder.typicode.com/users')
-//             .then((resp) => {
-//                 console.log(resp);
-//                 setEmpList(resp.data);
-//             })
-//     };
-
-//     return (
-//         <>
-//             <h1>EmpList Component</h1>
-//             <p> {empList && empList.length} </p>
-//             <button onClick={getEmpList}>Get Emp List</button>
-
-//         </>
-//     );
-// };
-
-// export default EmpList;
